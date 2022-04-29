@@ -1,0 +1,44 @@
+body {
+  background-color: rgb(217, 234, 211);
+}
+.app {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(192, 243, 185);
+  margin: 0 calc(50% - 400px);
+
+  h1 {
+    color: rgb(15, 60, 31);
+    text-align: center;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 0 20px 20px 20px;
+  }
+  button {
+    margin-right: 30px;
+    width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(122, 159, 122);
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .country {
+    padding: 10px;
+
+    .one {
+      background-color: rgb(144, 207, 166);
+      margin-left: 10px;
+      h3,
+      h4,
+      h5 {
+        margin-left: 20px;
+        color: rgb(15, 60, 31);
+      }
+    }
+  }
+}
