@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import Country from "./Country";
+import Pagination from "./Pagination";
 
-function CountryList() {
+// import getNewId from "../Common/id";
+
+function CountryList({ pages }) {
   const [countries, setCountries] = useState([]);
-  // const [smaller, setSmaller] = useState("");
   const [filteredCountry, setFilteredCountry] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemPerPage] = useState(17);
 
   useEffect(() => {
     fetch("https://restcountries.com/v2/all?fields=name,region,area")
@@ -15,6 +19,14 @@ function CountryList() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  // const renderPageNumbers = pages.map((number, index) => {
+  //   return (
+  //     <li key={number} number={index} onClick={handleClick}>
+  //       {number}
+  //     </li>
+  //   );
+  // });
 
   const sortArea = () => {
     const countriesCopy = [...countries];
@@ -71,21 +83,37 @@ function CountryList() {
       default:
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = countries.slice(indexOfFirstItem, indexOfLastItem);
+  //change page
+
+  const paginate = (pages) => setCurrentPage(pages);
   return (
     <>
+      <select onChange={(e) => handleInput(e)}>
+        <option value="oceania">That are in “Oceania” region</option>
+        <option value="smaller">Smaller than Lithuania</option>
+        <option value="all">All countries</option>
+      </select>
       <div className="buttons">
-        <button onClick={sortArea}>Acending</button>
-        <button onClick={sortArea2}>Descending</button>
-        <select onChange={(e) => handleInput(e)}>
-          <option value="oceania">That are in “Oceania” region</option>
-          <option value="smaller">Smaller than Lithuania</option>
-          <option value="all">All countries</option>
-        </select>
-        {/* <button>Reset</button> */}
+        <button onClick={sortArea}>A-Z</button>
+        <button onClick={sortArea2}>Z-A</button>
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={countries.length}
+        paginate={paginate}
+      ></Pagination>
       <Country
-        countries={filteredCountry.length > 0 ? filteredCountry : countries}
+        countries={filteredCountry.length > 0 ? filteredCountry : currentItems}
       ></Country>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={countries.length}
+        paginate={paginate}
+      ></Pagination>
     </>
   );
 }
