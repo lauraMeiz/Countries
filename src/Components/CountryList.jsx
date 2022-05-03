@@ -64,6 +64,9 @@ function CountryList() {
         // setOceania(e.target.value);
         setFilteredCountry(filtered);
         break;
+      case "all":
+        setFilteredCountry(countries);
+        break;
 
       default:
     }
@@ -76,6 +79,7 @@ function CountryList() {
         <select onChange={(e) => handleInput(e)}>
           <option value="oceania">That are in “Oceania” region</option>
           <option value="smaller">Smaller than Lithuania</option>
+          <option value="all">All countries</option>
         </select>
         {/* <button>Reset</button> */}
       </div>
