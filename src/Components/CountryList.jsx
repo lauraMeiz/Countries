@@ -4,7 +4,7 @@ import Country from "./Country";
 function CountryList() {
   const [countries, setCountries] = useState([]);
   // const [smaller, setSmaller] = useState("");
-  const [filteredCountry, setFilteredCountry] = useState("");
+  const [filteredCountry, setFilteredCountry] = useState([]);
 
   useEffect(() => {
     fetch("https://restcountries.com/v2/all?fields=name,region,area")
@@ -19,32 +19,34 @@ function CountryList() {
   const sortArea = () => {
     const countriesCopy = [...countries];
     // countriesCopy.sort((a, b) => a.area - b.area);
-    countriesCopy.sort();
+
+    countriesCopy.sort(function (a, b) {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+
     setCountries(countriesCopy);
   };
 
   const sortArea2 = () => {
     const countriesCopy = [...countries];
-    // countriesCopy.sort((a, b) => b.area - a.area);
-    countriesCopy.sort();
-    countriesCopy.reverse();
+    countriesCopy.sort(function (a, b) {
+      if (b.name < a.name) {
+        return -1;
+      }
+      if (b.name > a.name) {
+        return 1;
+      }
+      return 0;
+    });
     setCountries(countriesCopy);
   };
 
-  // const getSmaller = () => {
-  //   const countriesCopy = [...countries];
-  //   console.log(countriesCopy);
-  //   const filtered = countriesCopy.filter((a) => a.area < 65300);
-  //   setCountries(filtered);
-  //   console.log(filtered);
-  // };
-
-  // const getOceania = () => {
-  //   const countriesCopy = [...countries];
-
-  //   const filtered = countriesCopy.filter((a) => a.region === "Oceania");
-  //   setCountries(filtered);
-  // };
   const handleInput = (e) => {
     switch (e.target.value) {
       case "smaller":
@@ -52,15 +54,15 @@ function CountryList() {
         console.log(countriesCo);
         const filter = countriesCo.filter((a) => a.area < 65300);
         console.log(filter);
-        setCountries(filter);
+        setFilteredCountry(filter);
 
         break;
       case "oceania":
         const countriesCopy = [...countries];
         const filtered = countriesCopy.filter((a) => a.region === "Oceania");
 
-        setCountries(filtered);
         // setOceania(e.target.value);
+        setFilteredCountry(filtered);
         break;
 
       default:
@@ -74,15 +76,11 @@ function CountryList() {
         <select onChange={(e) => handleInput(e)}>
           <option value="oceania">That are in “Oceania” region</option>
           <option value="smaller">Smaller than Lithuania</option>
-          {/* <option value="oceania">That are in “Oceania” region</option> */}
         </select>
-        {/* <button onClick={getSmaller}>Smaller than Lithuania</button>
-        <button onClick={getOceania}>That are in “Oceania” region</button> */}
+        {/* <button>Reset</button> */}
       </div>
       <Country
-        // oceania={oceania}
-        // smaller={smaller}
-        countries={countries}
+        countries={filteredCountry.length > 0 ? filteredCountry : countries}
       ></Country>
     </>
   );
