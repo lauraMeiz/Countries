@@ -1,4 +1,9 @@
-function Country({ countries, renderPageNumbers, currentItems }) {
+function Country({
+  countries,
+  renderPageNumbers,
+  currentItems,
+  filteredCountry,
+}) {
   return (
     <>
       <div className="pageNumber">{/* {renderPageNumbers} */}</div>

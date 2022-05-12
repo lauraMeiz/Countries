@@ -77,7 +77,7 @@ function CountryList({ pages }) {
         setFilteredCountry(filtered);
         break;
       case "all":
-        setFilteredCountry(countries);
+        setFilteredCountry([]);
         break;
 
       default:
@@ -90,6 +90,7 @@ function CountryList({ pages }) {
   //change page
 
   const paginate = (pages) => setCurrentPage(pages);
+
   return (
     <>
       <select onChange={(e) => handleInput(e)}>
@@ -103,17 +104,19 @@ function CountryList({ pages }) {
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
-        totalItems={countries.length}
+        totalItems={
+          filteredCountry.length ? filteredCountry.length : countries.length
+        }
         paginate={paginate}
       ></Pagination>
       <Country
         countries={filteredCountry.length > 0 ? filteredCountry : currentItems}
       ></Country>
-      <Pagination
+      {/* <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={countries.length}
         paginate={paginate}
-      ></Pagination>
+      ></Pagination> */}
     </>
   );
 }

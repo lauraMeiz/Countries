@@ -7,6 +7,16 @@ body {
   flex-direction: column;
   background-color: #e3ffe3;
   margin: 0 calc(50% - 500px);
+  @media (max-width: 1100px) {
+    width: 700px;
+    margin: 0 calc(50% - 350px);
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    // margin: 0 calc(50% - 350px);
+  }
 
   h1 {
     color: rgb(15, 60, 31);
@@ -21,8 +31,15 @@ body {
     line-height: 10px;
     font-size: 20px;
     z-index: 3;
+    @media (max-width: 1100px) {
+      width: 300px;
+    }
+    @media (max-width: 375px) {
+      width: 200px;
+      line-height: 7px;
+      font-size: 14px;
+    }
   }
-
   .buttons {
     display: flex;
     flex-direction: row;
@@ -37,10 +54,18 @@ body {
     color: rgb(69, 116, 78);
     text-transform: uppercase;
     border: #ccffcc;
+    @media (max-width: 1100px) {
+      width: 80px;
+    }
   }
   .pageNumber {
     display: flex;
     list-style: none;
+    @media (max-width: 375px) {
+      width: 375px;
+      margin: 0;
+      padding: 0;
+    }
   }
   .pageNumber li {
     width: 30px;
@@ -52,10 +77,26 @@ body {
     cursor: pointer;
     margin: 10px;
     border-radius: 25px;
+    @media (max-width: 1100px) {
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+    }
+    @media (max-width: 375px) {
+      width: 19px;
+      height: 19px;
+      border-radius: 19px;
+    }
   }
   .pageNumber a {
     text-decoration: none;
     color: rgb(51, 72, 52);
+    @media (max-width: 1100px) {
+      font-size: 11px;
+    }
+    @media (max-width: 375px) {
+      font-size: 12px;
+    }
   }
 
   .country {
