@@ -86,7 +86,9 @@ function CountryList({ pages }) {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = countries.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredCountry.length
+    ? filteredCountry.slice(indexOfFirstItem, indexOfLastItem)
+    : countries.slice(indexOfFirstItem, indexOfLastItem);
   //change page
 
   const paginate = (pages) => setCurrentPage(pages);
@@ -109,9 +111,7 @@ function CountryList({ pages }) {
         }
         paginate={paginate}
       ></Pagination>
-      <Country
-        countries={filteredCountry.length > 0 ? filteredCountry : currentItems}
-      ></Country>
+      <Country countries={currentItems}></Country>
       {/* <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={countries.length}

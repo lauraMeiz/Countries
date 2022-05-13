@@ -14,7 +14,6 @@ function Country({
             <h3>{m.name}</h3>
             <p>{m.region}</p>
             <p>{m.area} (Area Size)</p>
-            {currentItems}
           </div>
         ))}
       </div>
