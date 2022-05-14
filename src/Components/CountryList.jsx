@@ -9,7 +9,7 @@ function CountryList({ pages }) {
   const [filteredCountry, setFilteredCountry] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemPerPage] = useState(17);
-
+  const [currentButton, setCurrentButton] = useState(1);
   useEffect(() => {
     fetch("https://restcountries.com/v2/all?fields=name,region,area")
       .then((res) => res.json())
@@ -110,6 +110,7 @@ function CountryList({ pages }) {
           filteredCountry.length ? filteredCountry.length : countries.length
         }
         paginate={paginate}
+        currentButton={currentButton}
       ></Pagination>
       <Country countries={currentItems}></Country>
       {/* <Pagination
