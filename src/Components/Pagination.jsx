@@ -14,7 +14,7 @@ function Pagination({ setCurrentButton, itemsPerPage, totalItems, paginate }) {
           className="disabled"
           onClick={() => setCurrentButton((prev) => prev - 1)}
         >
-          Prev
+          {/* Prev */}
         </a>
         {pages.map((number) => (
           <li key={number}>
